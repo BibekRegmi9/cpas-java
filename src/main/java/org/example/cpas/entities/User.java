@@ -17,6 +17,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
     private int id;
 
     @Column(name = "user_name")
@@ -38,7 +39,7 @@ public class User {
     private String gender;
 
     @Column(name = "is_active")
-    private String is_active;
+    private boolean is_active;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
