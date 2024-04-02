@@ -1,15 +1,11 @@
 package org.example.cpas.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import java.util.Date;
 
 @Entity
@@ -20,17 +16,21 @@ import java.util.Date;
 public class UserRoleMapping {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    private User user;
 
     @Column(name = "is_active")
     private boolean is_active;
 
-    @Column(name = "user_id")
-    private int user_id;
 
-    @Column(name = "role_id")
-    private int role_id;
+    @ManyToOne
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private Role role;
 
     @CreationTimestamp
     @Column(name = "created_at")
