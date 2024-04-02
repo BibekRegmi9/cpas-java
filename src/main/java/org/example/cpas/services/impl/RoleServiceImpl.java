@@ -20,10 +20,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public RoleDto createRole(RoleDto roleDto){
-        Role role = new Role();
-        role.setName(roleDto.getName());
+        Role role = this.modelMapper.map(roleDto, Role.class);
         Role savedRole = this.roleRepository.save(role);
-
         return this.modelMapper.map(savedRole, RoleDto.class);
     }
 
@@ -53,8 +51,8 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public void deleteRole(Integer roleID) {
-        Role role = this.roleRepository.findById(roleID).orElseThrow();
+    public void deleteRole(Integer roleId) {
+        Role role = this.roleRepository.findById(roleId).orElseThrow();
         this.roleRepository.delete(role);
     }
 }

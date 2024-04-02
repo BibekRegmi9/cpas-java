@@ -1,7 +1,9 @@
 package org.example.cpas.entities;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,29 +13,24 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.util.Date;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "user_role_mapping")
 @NoArgsConstructor
 @Getter
 @Setter
-public class Role {
+public class UserRoleMapping {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
 
-    @NotEmpty
-    @Column(name = "name")
-    private String name;
+    @Column(name = "is_active")
+    private boolean is_active;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "user_id")
+    private int user_id;
 
-    @Column(name = "code")
-    private String code;
-
-    @Column(name = "role_type")
-    private String role_type;
+    @Column(name = "role_id")
+    private int role_id;
 
     @CreationTimestamp
     @Column(name = "created_at")

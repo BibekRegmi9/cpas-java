@@ -2,9 +2,9 @@ package org.example.cpas.controller;
 
 import jakarta.validation.Valid;
 import org.example.cpas.dto.RoleDto;
-import org.example.cpas.dto.UserDto;
+
 import org.example.cpas.services.RoleService;
-import org.example.cpas.services.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/api/v1/roles")
 public class RoleController {
 
     @Autowired
@@ -31,7 +31,7 @@ public class RoleController {
         return new ResponseEntity<RoleDto>(updateRole, HttpStatus.OK);
     }
 
-    @GetMapping("/")
+    @GetMapping("/{roleId}")
     public ResponseEntity<RoleDto> getRole(@PathVariable("roleId") Integer rid){
         RoleDto getRole = this.roleService.getRole(rid);
         return new ResponseEntity<RoleDto>(getRole, HttpStatus.OK);
@@ -43,7 +43,7 @@ public class RoleController {
         return ResponseEntity.ok(getAllRole);
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping("/{roleId}")
     public boolean ResponseEntity(@PathVariable("roleId") Integer rid){
         this.roleService.deleteRole(rid);
         return true;
