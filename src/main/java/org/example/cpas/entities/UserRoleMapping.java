@@ -27,7 +27,6 @@ public class UserRoleMapping {
     @Column(name = "is_active")
     private boolean is_active;
 
-
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;
