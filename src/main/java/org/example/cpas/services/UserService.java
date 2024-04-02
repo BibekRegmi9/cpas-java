@@ -9,7 +9,7 @@ public interface UserService {
 
     UserDto updateUser(UserDto user, Integer userId);
 
-    UserDto getById(UserDto user, Integer userId);
+    UserDto getById(Integer userId);
 
     List<UserDto> getAllUsers();
 

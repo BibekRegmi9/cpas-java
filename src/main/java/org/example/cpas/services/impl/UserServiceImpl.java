@@ -20,12 +20,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private ModelMapper modelMapper;
 
-
     @Override
     public UserDto createUser(UserDto userDto){
-        User user = this.dtoToUser(userDto);
+        User user = this.modelMapper.map(userDto, User.class);
         User savedUser = this.userRepository.save(user);
-        return this.userToDto(savedUser);
+        return this.modelMapper.map(savedUser, UserDto.class);
     }
 
     @Override
@@ -40,20 +39,19 @@ public class UserServiceImpl implements UserService {
         user.set_active(userDto.is_active());
 
         User updatedUser =this.userRepository.save(user);
-        UserDto userDto1 =this.userToDto(updatedUser);
-        return userDto1;
+        return this.modelMapper.map(updatedUser, UserDto.class);
     }
 
     @Override
-    public UserDto getById(UserDto userDto, Integer userId) {
+    public UserDto getById(Integer userId) {
         User user = this.userRepository.findById(userId).orElseThrow();
-        return this.userToDto(user);
+        return this.modelMapper.map(user, UserDto.class);
     }
 
     @Override
     public List<UserDto> getAllUsers() {
         List<User> users = this.userRepository.findAll();
-        List<UserDto> userDtos = users.stream().map(user -> this.userToDto(user)).collect(Collectors.toList());
+        List<UserDto> userDtos = users.stream().map(user -> this.modelMapper.map(user, UserDto.class)).collect(Collectors.toList());
         return userDtos;
     }
 
@@ -62,16 +60,5 @@ public class UserServiceImpl implements UserService {
         User user = this.userRepository.findById(userId).orElseThrow();
         this.userRepository.delete(user);
     }
-
-    private User dtoToUser(UserDto userDto){
-        User user = this.modelMapper.map(userDto, User.class);
-        return user;
-    }
-
-    public UserDto userToDto(User user){
-        UserDto userDto = this.modelMapper.map(user, UserDto.class);
-        return userDto;
-    }
-
 
 }

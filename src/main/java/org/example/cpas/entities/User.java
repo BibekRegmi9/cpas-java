@@ -1,9 +1,14 @@
 package org.example.cpas.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 
@@ -20,17 +25,26 @@ public class User {
     @Column(name = "user_id")
     private int id;
 
+    @NotEmpty
+    @Size(min = 4, max = 25)
     @Column(name = "user_name")
     private String name;
 
+    @NotEmpty
+    @Email
     @Column(name = "email")
     private String email;
 
+    @NotEmpty
     @Column(name = "password")
+    @Size(min = 4, max = 25)
     private String password;
 
+    @NotEmpty
     @Column(name = "phone")
+    @Size(min = 8, max = 15)
     private String phone;
+
 
     @Column(name = "citizenship_no")
     private String citizenNo;
@@ -41,11 +55,11 @@ public class User {
     @Column(name = "is_active")
     private boolean is_active;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
     @Column(name = "created_at")
     private Date createdAt;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private Date updatedAt;
 }
