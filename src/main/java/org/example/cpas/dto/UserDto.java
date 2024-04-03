@@ -17,6 +17,5 @@ public class UserDto {
     private String citizenNo;
     private String gender;
     private boolean is_active;
-
-
+    private Integer[] roleId;
 }
