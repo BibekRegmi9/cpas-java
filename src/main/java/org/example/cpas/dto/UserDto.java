@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -17,5 +19,5 @@ public class UserDto {
     private String citizenNo;
     private String gender;
     private boolean is_active;
-    private Integer[] roleId;
+    private List<RoleDto> roleDtos;
 }

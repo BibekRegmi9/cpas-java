@@ -1,4 +1,5 @@
 package org.example.cpas.services.impl;
+import org.example.cpas.converter.DtoConverter;
 import org.example.cpas.dto.UserDto;
 import org.example.cpas.entities.Role;
 import org.example.cpas.entities.User;
@@ -40,19 +41,19 @@ public class UserServiceImpl implements UserService {
         User user = this.modelMapper.map(userDto, User.class);
         User savedUser = this.userRepository.save(user);
 
-        for(Integer roleId: userDto.getRoleId()){
-
-           Optional<Role> optionalRole= this.roleRepository.findById(roleId);
-            Role role = optionalRole.orElse(null);
-            if(role==null){
-               throw new RuntimeException("Empty role");
-           }else{
-               UserRoleMapping userRole = new UserRoleMapping();
-               userRole.setUser(savedUser);
-               userRole.setRole(role);
-               userRoleRepository.save(userRole);
-           }
-        }
+//        for(Integer roleId: userDto.getRoleDtos(){
+//
+//           Optional<Role> optionalRole= this.roleRepository.findById(roleId);
+//            Role role = optionalRole.orElse(null);
+//            if(role==null){
+//               throw new RuntimeException("Empty role");
+//           }else{
+//               UserRoleMapping userRole = new UserRoleMapping();
+//               userRole.setUser(savedUser);
+//               userRole.setRole(role);
+//               userRoleRepository.save(userRole);
+//           }
+//        }
 
         return this.modelMapper.map(savedUser, UserDto.class);
     }
@@ -78,17 +79,27 @@ public class UserServiceImpl implements UserService {
         return this.modelMapper.map(user, UserDto.class);
     }
 
-    @Override
-    public List<UserDto> getAllUsers() {
-        List<User> users = this.userRepository.findAll();
-        List<UserDto> userDtos = users.stream().map(user -> this.modelMapper.map(user, UserDto.class)).collect(Collectors.toList());
-        return userDtos;
-    }
+
+
+//    @Override
+//    public List<UserDto> getAllUsers() {
+//        List<User> users = this.userRepository.findAll();
+//        List<UserDto> userDtos = users.stream().map(user -> this.modelMapper.map(user, UserDto.class)).collect(Collectors.toList());
+//        return userDtos;
+//    }
+
+
 
     @Override
     public void deleteUser(Integer userId) {
         User user = this.userRepository.findById(userId).orElseThrow();
         this.userRepository.delete(user);
+    }
+
+    @Override
+    public List<UserDto> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        return users.stream().map(DtoConverter::convert).collect(Collectors.toList());
     }
 
 }

@@ -32,14 +32,19 @@ public class UserController {
     }
 
     //get-all
+//    @GetMapping("/")
+//    public ResponseEntity<List<UserDto>> getAllUsers(){
+//        List<UserDto> users =this.userService.getAllUsers();
+//        return ResponseEntity.ok(users);
+//    }
+
     @GetMapping("/")
-    public ResponseEntity<List<UserDto>> getAllUsers(){
-        List<UserDto> users =this.userService.getAllUsers();
-        return ResponseEntity.ok(users);
+    public List<UserDto> getAllUsers(){
+        return userService.getAllUsers();
     }
 
     //get
-    @GetMapping("/{userId}")
+    @GetMapping("/by-id/{userId}")
     public ResponseEntity<UserDto> getUser(@PathVariable("userId") Integer uid){
         UserDto user = this.userService.getById(uid);
         return new ResponseEntity<UserDto>(user, HttpStatus.OK);
@@ -51,5 +56,6 @@ public class UserController {
         this.userService.deleteUser(uid);
         return true;
     }
+
 
 }

@@ -64,5 +64,8 @@ public class User {
     @Column(name = "updated_at")
     private Date updatedAt;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<UserRoleMapping> roles;
+
 
 }
