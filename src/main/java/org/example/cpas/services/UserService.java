@@ -14,4 +14,5 @@ public interface UserService {
     void deleteUser(Integer userId);
 
     List<UserDto> getAllUsers();
+
 }
