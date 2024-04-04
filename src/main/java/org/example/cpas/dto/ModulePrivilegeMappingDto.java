@@ -15,7 +15,4 @@ public class ModulePrivilegeMappingDto {
     private String code;
     private boolean is_active;
 
-    private int[] privilegeId;
-    private int[] moduleId;
-
 }
