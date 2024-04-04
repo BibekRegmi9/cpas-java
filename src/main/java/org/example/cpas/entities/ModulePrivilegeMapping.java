@@ -10,11 +10,11 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.util.Date;
 
 @Entity
-@Table(name = "modules")
+@Table(name = "module_privilege_mappings")
 @NoArgsConstructor
 @Getter
 @Setter
-public class Module {
+public class ModulePrivilegeMapping {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,9 +33,13 @@ public class Module {
     @Column(name = "is_active")
     private boolean is_active;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "screenId", referencedColumnName = "id")
-    private Screen screen;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "moduleId", referencedColumnName = "id")
+    private Module module;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "privilegeId", referencedColumnName = "id")
+    private Privilege privilege;
 
     @CreationTimestamp
     @Column(name = "created_at")
