@@ -88,12 +88,12 @@ public class UserServiceImpl implements UserService {
                 .map(m -> Integer.valueOf(m.getId()))
                 .toArray(Integer[]::new);
 
-        Integer []  insertableRole= Arrays.stream(newRoleId).filter(f->{
+        Integer[]  insertableRole= Arrays.stream(newRoleId).filter(f->{
             System.out.println(f);
             return !Arrays.asList(oldRoleId).contains(f);
         }).toArray(Integer[]::new);
 
-        Integer []  deletableArrayList= Arrays.stream(oldRoleId).filter(f->{
+        Integer[]  deletableArrayList= Arrays.stream(oldRoleId).filter(f->{
             return !Arrays.asList(newRoleId).contains(f);
         }).toArray(Integer[]::new);
 
