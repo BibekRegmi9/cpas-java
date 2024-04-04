@@ -55,7 +55,9 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 
     @Override
     public void deletePrivilege(Integer privilegeId) {
-        Privilege privilege = this.privilegeRepository.findById(privilegeId).orElseThrow();
-        this.privilegeRepository.delete(privilege);
+        Privilege privilege = this.privilegeRepository.findById(privilegeId).orElse(null);
+        if(privilege!=null){
+            this.privilegeRepository.delete(privilege);
+        }
     }
 }

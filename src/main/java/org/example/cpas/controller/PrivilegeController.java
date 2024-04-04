@@ -41,8 +41,8 @@ public class PrivilegeController {
     }
 
     @DeleteMapping("/{privilegeId}")
-    public ResponseEntity<Boolean> deletePrivilege(@PathVariable("privilegeId") Integer pid){
+    public Boolean deletePrivilege(@PathVariable("privilegeId") Integer pid){
         this.privilegeService.deletePrivilege(pid);
-        return (ResponseEntity<Boolean>) ResponseEntity.status(HttpStatus.ACCEPTED);
+        return true;
     }
 }
