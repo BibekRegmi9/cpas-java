@@ -21,12 +21,11 @@ public class ModuleDto {
 
     private List<PrivilegeDto> privilege;
 
-    private int[] screen_id;
-
+    private int screen_id;
 
     @Data
     public static class PrivilegeDto{
-        private Integer privilege_id;
+        private Integer privilegeId;
         private String method;
         private String endpoint;
 

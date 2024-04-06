@@ -33,7 +33,7 @@ public class Module {
     @Column(name = "is_active")
     private boolean is_active;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "screenId", referencedColumnName = "id")
     private Screen screen;
 
